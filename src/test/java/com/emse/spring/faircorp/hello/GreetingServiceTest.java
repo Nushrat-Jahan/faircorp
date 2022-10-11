@@ -12,7 +12,7 @@ public class GreetingServiceTest {
     @Test
     public void testGreeting(CapturedOutput output) {
         GreetingService greetingService = new ConsoleGreetingService(); // (2)
-        greetingService.greet("Nushrat");
-        Assertions.assertThat(output.getAll()).contains("Hello, Nushrat!");
+        greetingService.greet("Spring");
+        Assertions.assertThat(output.getAll()).contains("Hello, Spring!");
     }
 }
