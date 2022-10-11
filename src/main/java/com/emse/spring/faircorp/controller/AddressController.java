@@ -1,7 +1,7 @@
 package com.emse.spring.faircorp.controller;
 
-import com.emse.spring.faircorp.service.AdressSearchService;
-import com.emse.spring.faircorp.service.dto.ApiGouvAdressDto;
+import com.emse.spring.faircorp.service.AddressSearchService;
+import com.emse.spring.faircorp.service.dto.ApiGouvAddressDto;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -13,13 +13,13 @@ import java.util.List;
 @RequestMapping("/api/address") // (2)
 @Transactional // (3)
 public class AddressController {
-    private final AdressSearchService address;
+    private final AddressSearchService address;
 
-    public AddressController(AdressSearchService address) { // (4)
+    public AddressController(AddressSearchService address) { // (4)
         this.address = address;
     }
     @GetMapping // (5)
-    public List<ApiGouvAdressDto> findAll(@RequestParam List<String> keys) {
-        return address.findAdress(keys);  // (6)
+    public List<ApiGouvAddressDto> findAll(@RequestParam List<String> keys) {
+        return address.findAddress(keys);  // (6)
     }
 }

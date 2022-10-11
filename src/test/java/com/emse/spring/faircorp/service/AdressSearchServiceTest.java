@@ -1,6 +1,6 @@
 package com.emse.spring.faircorp.service;
 
-import com.emse.spring.faircorp.service.dto.ApiGouvAdressDto;
+import com.emse.spring.faircorp.service.dto.ApiGouvAddressDto;
 import com.emse.spring.faircorp.service.dto.ApiGouvFeatureDto;
 import com.emse.spring.faircorp.service.dto.ApiGouvResponseDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -11,21 +11,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.client.MockRestServiceServer;
-import org.springframework.test.web.client.match.MockRestRequestMatchers;
-import org.springframework.test.web.client.response.MockRestResponseCreators;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
-@RestClientTest(AdressSearchService.class)
-class AdressSearchServiceTest {
+@RestClientTest(AddressSearchService.class)
+class AddressSearchServiceTest {
     @Autowired
-    private AdressSearchService service;
+    private AddressSearchService service;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -34,7 +30,7 @@ class AdressSearchServiceTest {
     private MockRestServiceServer server;
 
     @Test
-    void shouldFindAdresses() throws JsonProcessingException {
+    void shouldFindAddresses() throws JsonProcessingException {
         // Arrange
         ApiGouvResponseDto expectedResponse = simulateApiResponse();
 
@@ -49,22 +45,22 @@ class AdressSearchServiceTest {
                 .expect(requestTo(expectedUrl))
                 .andRespond(withSuccess(objectMapper.writeValueAsString(expectedResponse), MediaType.APPLICATION_JSON));
         // Act
-        List<ApiGouvAdressDto> adresses = this.service.findAdress(List.of("cours", "fauriel"));
+        List<ApiGouvAddressDto> addresses = this.service.findAddress(List.of("cours", "fauriel"));
 
         // Assert
         Assertions
-                .assertThat(adresses)
+                .assertThat(addresses)
                 .hasSize(1)
-                .extracting(ApiGouvAdressDto::getCity)
+                .extracting(ApiGouvAddressDto::getCity)
                 .contains("Saint Etienne");
     }
 
     private ApiGouvResponseDto simulateApiResponse() {
-        ApiGouvAdressDto expectedAdress = new ApiGouvAdressDto();
-        expectedAdress.setCity("Saint Etienne");
+        ApiGouvAddressDto expectedAddress = new ApiGouvAddressDto();
+        expectedAddress.setCity("Saint Etienne");
 
         ApiGouvFeatureDto expectedFeature = new ApiGouvFeatureDto();
-        expectedFeature.setProperties(expectedAdress);
+        expectedFeature.setProperties(expectedAddress);
 
         ApiGouvResponseDto expectedResponse = new ApiGouvResponseDto();
         expectedResponse.setFeatures(List.of(expectedFeature));
