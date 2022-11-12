@@ -31,32 +31,32 @@ IDE: intellij idea</br>
 
 ## Implemented APIs
 ### 1. BUILDING
-   -[x] GET/api/buildings : Gets all the buildings list along with room, window and heater information.
-   -[x] POST/api/buildings : Creates a new building or update an existing building by building id.
-   -[x] GET/api/buildings/{building_id} : Gets individual building information by building id.
-   -[x] DELETE/api/buildings/{building_id} : Deletes building by building's id.
+   - [x] GET/api/buildings : Gets all the buildings list along with room, window and heater information.
+   - [x] POST/api/buildings : Creates a new building or update an existing building by building id.
+   - [x] GET/api/buildings/{building_id} : Gets individual building information by building id.
+   - [x] DELETE/api/buildings/{building_id} : Deletes building by building's id.
 
 ### 2. ROOM
-   -[x] GET/api/rooms : Gets all the rooms list along with windows and heaters.
-   -[x] POST/api/rooms : Creates a new room or update an existing room by room id.
-   -[x] GET/api/rooms/{room_id} : Gets individual room's information by room id.
-   -[x] DELETE/api/rooms/{room_id} : Deletes individual room by room's id.
-   -[x] PUT/api/rooms/{room_id}/switchHeaters : Switches the heaters of a room ON or OFF using that room's room id. 
-   -[x] PUT/api/rooms/{room_id}/switchWindows : Switches the windows of a room OPEN or CLOSE using that room's room id.
-   -[x] GET/api/rooms/building/{building_id} : Gets all the rooms of a building by that building's building id.
+   - [x] GET/api/rooms : Gets all the rooms list along with windows and heaters.
+   - [x] POST/api/rooms : Creates a new room or update an existing room by room id.
+   - [x] GET/api/rooms/{room_id} : Gets individual room's information by room id.
+   - [x] DELETE/api/rooms/{room_id} : Deletes individual room by room's id.
+   - [x] PUT/api/rooms/{room_id}/switchHeaters : Switches the heaters of a room ON or OFF using that room's room id. 
+   - [x] PUT/api/rooms/{room_id}/switchWindows : Switches the windows of a room OPEN or CLOSE using that room's room id.
+   - [x] GET/api/rooms/building/{building_id} : Gets all the rooms of a building by that building's building id.
 
 ### 3. HEATER
-   -[x] GET/api/heaters : Gets all the heaters list along with its information.
-   -[x] POST/api/heaters : Creates a new heater or update an existing heater by heater id
-   -[x] GET/api/heaters/{heater_id} : Gets individual heater's information by heater id
-   -[x] DELETE/api/heaters/{heater_id} : Deletes individual heater by heater's id.
-   -[x] PUT/api/heaters/{heater_id}/switch : Switches the heater ON or OFF status
-   -[x] GET/api/heaters/room/{room_id} : Gets all the heaters of a room by that room's room id.
+   - [x] GET/api/heaters : Gets all the heaters list along with its information.
+   - [x] POST/api/heaters : Creates a new heater or update an existing heater by heater id
+   - [x] GET/api/heaters/{heater_id} : Gets individual heater's information by heater id
+   - [x] DELETE/api/heaters/{heater_id} : Deletes individual heater by heater's id.
+   - [x] PUT/api/heaters/{heater_id}/switch : Switches the heater ON or OFF status
+   - [x] GET/api/heaters/room/{room_id} : Gets all the heaters of a room by that room's room id.
 
 ### 4. WINDOW
-   -[x] GET/api/windows : Gets all the windows list along with its information.
-   -[x] POST/api/windows : Creates a new window or update an existing window by window id.
-   -[x] GET/api/windows/{window_id} : Gets individual window's information by window id
-   -[x] DELETE/api/windows/{window_id} : Deletes individual window by window's id.
-   -[x] PUT/api/windows/{window_id}/switch : Switches the window OPEN or CLOSE status.
-   -[x] GET/api/windows/room/{room_id} : Gets all the windows of a room by that room's room id.
+   - [x] GET/api/windows : Gets all the windows list along with its information.
+   - [x] POST/api/windows : Creates a new window or update an existing window by window id.
+   - [x] GET/api/windows/{window_id} : Gets individual window's information by window id
+   - [x] DELETE/api/windows/{window_id} : Deletes individual window by window's id.
+   - [x] PUT/api/windows/{window_id}/switch : Switches the window OPEN or CLOSE status.
+   - [x] GET/api/windows/room/{room_id} : Gets all the windows of a room by that room's room id.
