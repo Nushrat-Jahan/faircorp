@@ -2,6 +2,7 @@ package com.emse.spring.faircorp.model;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "HEATER")
 public class Heater {
     @Id
     @GeneratedValue
@@ -58,7 +59,7 @@ public class Heater {
         return room;
     }
 
-    public void setRoom(Room name) {
+    public void setRoom(Room room) {
         this.room = room;
     }
 

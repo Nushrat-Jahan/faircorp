@@ -16,7 +16,7 @@ class RoomDaoTest {
     @Test
     public void shouldFindAWindow() {
         Room room = roomDao.getReferenceById(-10L);
-        Assertions.assertThat(room.getName()).isEqualTo("Room1");
+        Assertions.assertThat(room.getName()).isEqualTo("Room 1");
         Assertions.assertThat(room.getFloor()).isEqualTo(1);
     }
 }

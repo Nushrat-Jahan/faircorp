@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Table(name = "ROOM")
 public class Room {
     @Id
     @GeneratedValue
@@ -18,11 +19,12 @@ public class Room {
     private Double currentTemperature;
     private Double targetTemperature;
 
+    @ManyToOne(optional = false)
+    private Building building;
 
-
-    @OneToMany(mappedBy = "room")
+    @OneToMany(mappedBy = "room",cascade = CascadeType.REMOVE)
     private Set<Heater> heaters;
-    @OneToMany(mappedBy = "room")
+    @OneToMany(mappedBy = "room",cascade = CascadeType.REMOVE)
     private Set<Window> windows;
 
 
@@ -30,9 +32,22 @@ public class Room {
     }
 
     public Room(Integer floor,String name) {
+        this.floor = floor;
+        this.name = name;
+    }
+
+    public Room(Integer floor,String name, Building building) {
         this.floor=floor;
         this.name = name;
+        this.building = building;
+    }
 
+    public Room(Integer floor,String name, Double currentTemperature, Double targetTemperature, Building building) {
+        this.floor=floor;
+        this.name = name;
+        this.currentTemperature = currentTemperature;
+        this.targetTemperature = targetTemperature;
+        this.building = building;
     }
 
     public Long getId() {
@@ -87,9 +102,12 @@ public class Room {
         this.heaters = heaters;
     }
 
-
-    public void setRoomValue(Integer floor, String name) {
-        this.floor = floor;
-        this.name = name;
+    public Building getBuilding() {
+        return building;
     }
+
+    public void setBuilding(Building building) {
+        this.building = building;
+    }
+
 }

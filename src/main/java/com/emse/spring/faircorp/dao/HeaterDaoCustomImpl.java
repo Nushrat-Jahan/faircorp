@@ -19,4 +19,20 @@ public class HeaterDaoCustomImpl implements HeaterDaoCustom{
                 .setParameter("status", HeaterStatus.ON)
                 .getResultList();
     }
+
+    @Override
+    public void deleteAllHeatersByRoom(Long id) {
+        String jpql = "delete from Heater h where h.room.id = :id";
+        em.createQuery(jpql)
+                .setParameter("id", id)
+                .executeUpdate();
+    }
+
+    @Override
+    public List<Heater> findHeaterByRoomId(Long Id) {
+        String jpql = "select h from Heater h where h.room.id = :id";
+        return em.createQuery(jpql, Heater.class)
+                .setParameter("id", Id)
+                .getResultList();
+    }
 }

@@ -1,5 +1,6 @@
 package com.emse.spring.faircorp.controller;
 
+import com.emse.spring.faircorp.api.HeaterController;
 import com.emse.spring.faircorp.dao.HeaterDao;
 import com.emse.spring.faircorp.dao.RoomDao;
 import com.emse.spring.faircorp.dto.HeaterDto;
