@@ -1,4 +1,4 @@
-package com.emse.spring.faircorp.controller;
+package com.emse.spring.faircorp.api;
 
 import com.emse.spring.faircorp.api.HeaterController;
 import com.emse.spring.faircorp.dao.HeaterDao;

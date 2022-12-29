@@ -1,6 +1,5 @@
-package com.emse.spring.faircorp.controller;
+package com.emse.spring.faircorp.api;
 
-import com.emse.spring.faircorp.api.WindowController;
 import com.emse.spring.faircorp.dao.RoomDao;
 import com.emse.spring.faircorp.dao.WindowDao;
 import com.emse.spring.faircorp.dto.WindowDto;
