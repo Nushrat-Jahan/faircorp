@@ -1,5 +1,6 @@
 # faircorp
 - - - -
+[![License: MIT](https://img.shields.io/badge/License-MIT-ff69b4)](https://opensource.org/licenses/MIT)
 
 ### A building management application
 - - - -
