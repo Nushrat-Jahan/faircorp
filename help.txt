@@ -1,1 +1,2 @@
 Checkstyle resources gathered from:https://se-education.org/guides/tutorials/checkstyle.html
+spotbugs resources: https://mip-cloud.gitlab.io/post/2018/12/spotbugs/

@@ -3,6 +3,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
 	id 'java'
 	id 'checkstyle'
+	id "com.github.spotbugs" version "5.0.13"
 }
 
 group = 'com.emse.spring'
@@ -45,5 +46,13 @@ artifacts {
 }
 
 checkstyle {
+	ignoreFailures = true
 	toolVersion = '10.2'
+}
+
+spotbugs {
+	ignoreFailures = true
+	effort = "max"
+	reportLevel = "low"
+	includeFilter = file("./spotbugs-include.xml")
 }
