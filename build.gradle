@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.7.3'
 	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
 	id 'java'
+	id 'checkstyle'
 }
 
 group = 'com.emse.spring'
@@ -41,4 +42,8 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 artifacts {
 	archives sourcesJar
 	archives javadocJar
+}
+
+checkstyle {
+	toolVersion = '10.2'
 }

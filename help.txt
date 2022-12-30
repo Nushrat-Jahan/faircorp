@@ -1,0 +1,1 @@
+Checkstyle resources gathered from:https://se-education.org/guides/tutorials/checkstyle.html
