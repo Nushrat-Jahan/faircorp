@@ -81,7 +81,7 @@ public class HeaterController {
             heater.setHeaterStatus(dto.getHeaterStatus());
             heater.setPower(dto.getPower());
             heater.setName(dto.getName());
-            heater.setRoom(room);
+            //heater.setRoom(room);
 
         }
         return new HeaterDto(heater);

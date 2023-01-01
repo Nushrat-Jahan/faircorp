@@ -12,6 +12,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.web.csrf.CsrfToken;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -40,7 +44,12 @@ class WindowControllerTest {
     @MockBean
     private RoomDao roomDao;
 
+    String TOKEN_ATTR_NAME = "org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository.CSRF_TOKEN";
+    HttpSessionCsrfTokenRepository httpSessionCsrfTokenRepository = new HttpSessionCsrfTokenRepository();
+    CsrfToken csrfToken = httpSessionCsrfTokenRepository.generateToken(new MockHttpServletRequest());
+
     @Test
+    @WithMockUser
     void shouldLoadWindows() throws Exception {
         given(windowDao.findAll()).willReturn(List.of(
                 createWindow("window 1"),
@@ -55,6 +64,7 @@ class WindowControllerTest {
     }
 
     @Test
+    @WithMockUser
     void shouldLoadAWindowAndReturnNullIfNotFound() throws Exception {
         given(windowDao.findById(999L)).willReturn(Optional.empty());
 
@@ -66,6 +76,7 @@ class WindowControllerTest {
     }
 
     @Test
+    @WithMockUser
     void shouldLoadAWindow() throws Exception {
         given(windowDao.findById(999L)).willReturn(Optional.of(createWindow("window 1")));
 
@@ -77,13 +88,15 @@ class WindowControllerTest {
     }
 
     @Test
+    @WithMockUser
     void shouldSwitchWindow() throws Exception {
         Window expectedWindow = createWindow("window 1");
         Assertions.assertThat(expectedWindow.getWindowStatus()).isEqualTo(WindowStatus.OPEN);
 
         given(windowDao.findById(999L)).willReturn(Optional.of(expectedWindow));
 
-        mockMvc.perform(put("/api/windows/999/switch").accept(APPLICATION_JSON))
+        mockMvc.perform(put("/api/windows/999/switch").sessionAttr(TOKEN_ATTR_NAME, csrfToken)
+                        .param(csrfToken.getParameterName(),csrfToken.getToken()).accept(APPLICATION_JSON))
                 // check the HTTP response
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("window 1"))
@@ -91,6 +104,7 @@ class WindowControllerTest {
     }
 
     @Test
+    @WithMockUser
     void shouldUpdateWindow() throws Exception {
         Window expectedWindow = createWindow("window 1");
         expectedWindow.setId(1L);
@@ -99,7 +113,8 @@ class WindowControllerTest {
         given(roomDao.getReferenceById(anyLong())).willReturn(expectedWindow.getRoom());
         given(windowDao.getReferenceById(anyLong())).willReturn(expectedWindow);
 
-        mockMvc.perform(post("/api/windows").content(json).contentType(APPLICATION_JSON_VALUE))
+        mockMvc.perform(post("/api/windows").sessionAttr(TOKEN_ATTR_NAME, csrfToken)
+                        .param(csrfToken.getParameterName(),csrfToken.getToken()).content(json).contentType(APPLICATION_JSON_VALUE))
                 // check the HTTP response
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("window 1"))
@@ -107,6 +122,7 @@ class WindowControllerTest {
     }
 
     @Test
+    @WithMockUser
     void shouldCreateWindow() throws Exception {
         Window expectedWindow = createWindow("window 1");
         expectedWindow.setId(null);
@@ -115,15 +131,18 @@ class WindowControllerTest {
         given(roomDao.getReferenceById(anyLong())).willReturn(expectedWindow.getRoom());
         given(windowDao.save(any())).willReturn(expectedWindow);
 
-        mockMvc.perform(post("/api/windows").content(json).contentType(APPLICATION_JSON_VALUE))
+        mockMvc.perform(post("/api/windows").sessionAttr(TOKEN_ATTR_NAME, csrfToken)
+                        .param(csrfToken.getParameterName(),csrfToken.getToken()).content(json).contentType(APPLICATION_JSON_VALUE))
                 // check the HTTP response
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("window 1"));
     }
 
     @Test
+    @WithMockUser
     void shouldDeleteWindow() throws Exception {
-        mockMvc.perform(delete("/api/windows/999"))
+        mockMvc.perform(delete("/api/windows/999").sessionAttr(TOKEN_ATTR_NAME, csrfToken)
+                        .param(csrfToken.getParameterName(),csrfToken.getToken()))
                 .andExpect(status().isOk());
     }
 

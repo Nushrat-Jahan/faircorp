@@ -10,6 +10,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
+import org.springframework.security.web.csrf.CsrfToken;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -38,7 +43,12 @@ public class HeaterControllerTest {
     @MockBean
     private RoomDao roomDao;
 
+    String TOKEN_ATTR_NAME = "org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository.CSRF_TOKEN";
+    HttpSessionCsrfTokenRepository httpSessionCsrfTokenRepository = new HttpSessionCsrfTokenRepository();
+    CsrfToken csrfToken = httpSessionCsrfTokenRepository.generateToken(new MockHttpServletRequest());
+
     @Test
+    @WithMockUser
     void shouldLoadHeaters() throws Exception {
         given(heaterDao.findAll()).willReturn(List.of(
                 createHeater("heater 1"),
@@ -53,6 +63,7 @@ public class HeaterControllerTest {
     }
 
     @Test
+    @WithMockUser
     void shouldLoadAHeaterAndReturnNullIfNotFound() throws Exception {
         given(heaterDao.findById(999L)).willReturn(Optional.empty());
 
@@ -64,6 +75,7 @@ public class HeaterControllerTest {
     }
 
     @Test
+    @WithMockUser
     void shouldLoadAHeater() throws Exception {
         given(heaterDao.findById(999L)).willReturn(Optional.of(createHeater("heater 1")));
 
@@ -75,20 +87,26 @@ public class HeaterControllerTest {
     }
 
     @Test
+    @WithMockUser
     void shouldSwitchHeater() throws Exception {
+
+
         Heater expectedHeater = createHeater("heater 1");
         Assertions.assertThat(expectedHeater.getHeaterStatus()).isEqualTo(HeaterStatus.ON);
 
         given(heaterDao.findById(999L)).willReturn(Optional.of(expectedHeater));
 
-        mockMvc.perform(put("/api/heaters/999/switch").accept(APPLICATION_JSON))
+        mockMvc.perform(put("/api/heaters/999/switch").sessionAttr(TOKEN_ATTR_NAME, csrfToken)
+                        .param(csrfToken.getParameterName(),csrfToken.getToken()).accept(APPLICATION_JSON))
                 // check the HTTP response
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("heater 1"))
                 .andExpect(jsonPath("$.heaterStatus").value("OFF"));
     }
 
+
     @Test
+    @WithMockUser
     void shouldUpdateHeater() throws Exception {
         Heater expectedHeater = createHeater("heater 1");
         expectedHeater.setId(1L);
@@ -97,14 +115,17 @@ public class HeaterControllerTest {
         given(roomDao.getReferenceById(anyLong())).willReturn(expectedHeater.getRoom());
         given(heaterDao.getReferenceById(anyLong())).willReturn(expectedHeater);
 
-        mockMvc.perform(post("/api/heaters").content(json).contentType(APPLICATION_JSON_VALUE))
+        mockMvc.perform(post("/api/heaters").sessionAttr(TOKEN_ATTR_NAME, csrfToken)
+                        .param(csrfToken.getParameterName(),csrfToken.getToken()).content(json).contentType(APPLICATION_JSON_VALUE))
                 // check the HTTP response
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("heater 1"))
                 .andExpect(jsonPath("$.id").value("1"));
     }
 
+
     @Test
+    @WithMockUser
     void shouldCreateHeater() throws Exception {
         Heater expectedHeater = createHeater("heater 1");
         expectedHeater.setId(null);
@@ -113,15 +134,18 @@ public class HeaterControllerTest {
         given(roomDao.getReferenceById(anyLong())).willReturn(expectedHeater.getRoom());
         given(heaterDao.save(any())).willReturn(expectedHeater);
 
-        mockMvc.perform(post("/api/heaters").content(json).contentType(APPLICATION_JSON_VALUE))
+        mockMvc.perform(post("/api/heaters").sessionAttr(TOKEN_ATTR_NAME, csrfToken)
+                        .param(csrfToken.getParameterName(),csrfToken.getToken()).content(json).contentType(APPLICATION_JSON_VALUE))
                 // check the HTTP response
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("heater 1"));
     }
 
     @Test
+    @WithMockUser
     void shouldDeleteHeater() throws Exception {
-        mockMvc.perform(delete("/api/heaters/999"))
+        mockMvc.perform(delete("/api/heaters/999").sessionAttr(TOKEN_ATTR_NAME, csrfToken)
+                        .param(csrfToken.getParameterName(),csrfToken.getToken()))
                 .andExpect(status().isOk());
     }
 

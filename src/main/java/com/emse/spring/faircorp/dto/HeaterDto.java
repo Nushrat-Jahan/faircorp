@@ -18,8 +18,9 @@ public class HeaterDto {
         this.name = heater.getName();
         this.power = heater.getPower();
         this.heaterStatus = heater.getHeaterStatus();
-        this.roomName = heater.getRoom().getName();
         this.roomId = heater.getRoom().getId();
+        this.roomName = heater.getRoom().getName();
+
     }
 
     public Long getId() {
