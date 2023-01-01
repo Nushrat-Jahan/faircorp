@@ -66,10 +66,10 @@ IDE: intellij idea</br>
 # Docker
  
 In intellij ide on the top bar run application locally using the green button.
-![alt text](img/run.png)
+![alt text](img/run.PNG)
 
 In order to create jar files go to gradle->build->assemble(double click)
-![alt text](img/assemble.png)
+![alt text](img/assemble.PNG)
 
 After creating jar file run the following command to build the image
 ```bash
