@@ -1,7 +1,7 @@
 # faircorp
 - - - -
 [![License: MIT](https://img.shields.io/badge/License-MIT-ff69b4)](https://opensource.org/licenses/MIT)
-
+[![Stable version:v0.1.0](https://img.shields.io/badge/Stable%20version-v0.1.0-blueviolet)](https://github.com/Nushrat-Jahan/faircorp/releases/tag/v0.1.0)
 ### A building management application
 - - - -
 #### Author : [NUSHRAT JAHAN](https://github.com/Nushrat-Jahan)
