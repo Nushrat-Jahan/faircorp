@@ -61,3 +61,21 @@ IDE: intellij idea</br>
    - [x] DELETE/api/windows/{window_id} : Deletes individual window by window's id.
    - [x] PUT/api/windows/{window_id}/switch : Switches the window OPEN or CLOSE status.
    - [x] GET/api/windows/room/{room_id} : Gets all the windows of a room by that room's room id.
+     
+   
+# Docker
+ 
+In intellij ide on the top bar run application locally using the green button.
+![alt text](img/run.png)
+
+In order to create jar files go to gradle->build->assemble(double click)
+![alt text](img/assemble.png)
+
+After creating jar file run the following command to build the image
+```bash
+docker build -t nushrat .
+```
+The following command will run the image
+```bash
+docker run -p 8080:8080 nushrat
+```
