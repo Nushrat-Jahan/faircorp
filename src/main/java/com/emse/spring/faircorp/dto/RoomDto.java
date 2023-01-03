@@ -8,6 +8,7 @@ import com.emse.spring.faircorp.model.Room;
  * Serializing Room data
  * @author Nushrat Jahan
  */
+
 public class RoomDto {
     private Long id;
     private String name;

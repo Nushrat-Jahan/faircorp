@@ -11,6 +11,7 @@ import java.util.List;
  * This class  provides access to database
  * @author Nushrat Jahan
  */
+
 public class WindowDaoCustomImpl implements WindowDaoCustom {
 
     @PersistenceContext

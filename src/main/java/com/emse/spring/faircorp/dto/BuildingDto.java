@@ -8,6 +8,7 @@ import com.emse.spring.faircorp.model.Building;
  * Serializing Building data
  * @author Nushrat Jahan
  */
+
 public class BuildingDto {
     private Long id;
     private String name;

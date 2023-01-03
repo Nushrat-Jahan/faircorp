@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
  *
  * @author Nushrat Jahan
  */
+
 @SpringBootApplication
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class FaircorpApplication {

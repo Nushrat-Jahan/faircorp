@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
  * This class is for defining Building controller logics
  * @author Nushrat Jahan
  */
+
 @CrossOrigin
 @RestController
 @RequestMapping("/api/buildings")

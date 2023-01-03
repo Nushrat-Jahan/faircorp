@@ -6,6 +6,7 @@ import javax.persistence.*;
  * Table name HEATER
  * @author Nushrat Jahan
  */
+
 @Entity
 @Table(name = "HEATER")
 public class Heater {

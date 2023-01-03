@@ -9,6 +9,7 @@ import com.emse.spring.faircorp.model.WindowStatus;
  * Serializing Window data
  * @author Nushrat Jahan
  */
+
 public class WindowDto {
     private Long id;
     private String name;

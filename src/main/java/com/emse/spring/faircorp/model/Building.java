@@ -8,6 +8,7 @@ import java.util.Set;
  * Table name BUILDING
  * @author Nushrat Jahan
  */
+
 @Entity
 @Table(name = "BUILDING")
 public class Building {

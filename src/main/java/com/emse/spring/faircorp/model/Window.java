@@ -7,6 +7,7 @@ import javax.persistence.*;
  * Table name RWINDOW
  * @author Nushrat Jahan
  */
+
 @Entity
 @Table(name = "RWINDOW")
 public class Window {

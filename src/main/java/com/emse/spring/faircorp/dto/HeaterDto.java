@@ -8,6 +8,7 @@ import com.emse.spring.faircorp.model.*;
  * Serializing Heater data
  * @author Nushrat Jahan
  */
+
 public class HeaterDto {
     private Long id;
     private String name;
